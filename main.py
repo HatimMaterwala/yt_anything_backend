@@ -109,3 +109,9 @@ def download_video(data: dict, bg: BackgroundTasks):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/ffmpeg-check")
+def ffmpeg_check():
+    import subprocess
+    subprocess.run(["ffmpeg", "-version"], check=True)
+    return {"ffmpeg": "installed"}
